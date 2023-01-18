@@ -21,9 +21,6 @@ class HoneyJar():
         string = self.__Encryption1.decode(string)
         return string
 
-cm = HoneyJar('qwerty')
-lt = HoneyJar('qwertty')
-cm.encrypt
        
 
         
