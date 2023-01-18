@@ -49,10 +49,8 @@ def createStringToDecode(string: str) -> str:
     digits = '0123456789'
     letter = 0
     while True:
-        
         if string[letter] in digits:
-            letter+=1
-            
+            letter+=1   
         else:
             break
     string_to_decode = string[:letter+1]
@@ -71,7 +69,6 @@ def getLetter(string: str) -> str:
 def getCharPos(dictionary: dict, pos: int, alphabet: str) -> str:
     char = ''
     for letter in range(len(alphabet)):
-        
         if pos in dictionary[alphabet[letter]]:
             char = alphabet[letter]
             break    
@@ -80,7 +77,6 @@ def getCharPos(dictionary: dict, pos: int, alphabet: str) -> str:
 def getStringLength(dictionary: dict, alphabet: str) -> int:
     amount = 0
     for letter in range(len(alphabet)):
-        
         array = dictionary[alphabet[letter]]
         amount+=len(array)
     return amount
