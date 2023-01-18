@@ -5,6 +5,6 @@ HoneyJar takes as an argument a string with letters that you will use in sentenc
 
 HoneyJar has 2 functions:
 1) prepare(string) — encrypts string
-2) untie(string) — decrypts string
+2) unbar(string) — decrypts string
 
 If you have several classes with same alphabet, this classes can decrypt each other!
