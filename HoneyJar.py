@@ -16,7 +16,7 @@ class HoneyJar():
         string = self.__Encryption2.encode(string)
         return string
         
-    def untie(self, string: str) -> str:
+    def open(self, string: str) -> str:
         string = self.__Encryption2.decode(string)
         string = self.__Encryption1.decode(string)
         return string
