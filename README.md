@@ -1,2 +1,10 @@
 # HoneyJar
 HoneyJar is an encryption that will make your messages or files protected
+
+HoneyJar takes as an argument a string with letters that you will use in sentences you are going to encrypt
+
+HoneyJar has 2 functions:
+1) close(string) — encrypts string
+2) open(string) — decrypts string
+
+If you have several classes with same alphabet, this classes can decrypt each other!
