@@ -1,7 +1,7 @@
 #LTL encryption
 import sys
 sys.path.append('..')
-from Utilities.utils import RaiseTypeError, RaiseValueError, shuffleString, bSet
+from Utilities.utils import RaiseTypeError, RaiseValueError, bSet
 from Bin.symbols import symbols
 
 class LTL(): #this class helps to code messages in a several ways
