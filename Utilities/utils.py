@@ -1,5 +1,3 @@
-from random import shuffle
-
 def RaiseTypeError(variable_name: str, necessaryType: str, currentType: str) -> Exception:
     raise TypeError(f'{variable_name} must be {necessaryType}, not {currentType}')
 
@@ -12,15 +10,6 @@ def getType(var) -> str: #Gets the type of variable and returns it as a string
     pos2 = v.rfind("'")
     v = v[pos1+1:pos2]
     return v
-
-def shuffleString(string: str) -> str: #Shuffles strings randomly
-    if not(type(string) is str):
-        currentType = getType(string)
-        RaiseTypeError('string', 'str', currentType)
-    string = list(string)
-    shuffle(string)
-    string = str(string).strip("[]").replace(' ','').replace(',','').replace("'",'')
-    return string
 
 def bSet(var: str or list) -> str or list: #Analogue to set(), but saves the order
     if type(var) is str:
