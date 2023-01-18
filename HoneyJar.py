@@ -11,12 +11,12 @@ class HoneyJar():
         self.__Encryption1 = AOL(self._alphabet)
         self.__Encryption2 = LTL(self.__Encryption1.encode(self._alphabet))
 
-    def close(self, string: str) -> str:
+    def prepare(self, string: str) -> str:
         string = self.__Encryption1.encode(string)
         string = self.__Encryption2.encode(string)
         return string
         
-    def open(self, string: str) -> str:
+    def untie(self, string: str) -> str:
         string = self.__Encryption2.decode(string)
         string = self.__Encryption1.decode(string)
         return string
