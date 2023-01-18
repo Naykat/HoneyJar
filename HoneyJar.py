@@ -3,7 +3,7 @@ from Ciphers.LTL import LTL
 
 class HoneyJar():
 
-    def __init__(self, alphabet: str = '''ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()}{[]"№%:,.;_+-=/?\|±§<>'0123456789 ⠀''') -> None:
+    def __init__(self, alphabet: str = '''ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()}{[]"№%:,.;_+-=/?\|±§<>'0123456789 ''') -> None:
         #Protected variable. Can be called, but not changed outside the class
         self._alphabet = alphabet 
 
