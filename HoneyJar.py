@@ -9,7 +9,7 @@ class HoneyJar():
 
         #Private variables. Cannot be called or changed outside the class
         self.__Encryption1 = AOL(self._alphabet)
-        self.__Encryption2 = LTL(self.__Encryption1.encode(self._alphabet))
+        self.__Encryption2 = LTL(int(len(self._alphabet)**0.5))
 
     def prepare(self, string: str) -> str:
         string = self.__Encryption1.encode(string)
