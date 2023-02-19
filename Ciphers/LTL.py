@@ -2,7 +2,6 @@
 import sys
 sys.path.append('..')
 from Utilities.utils import RaiseTypeError, RaiseValueError, bSet, getType
-from Bin.symbols import symbols
 
 class LTL(): #Letter-to-letter
     def __init__(self, step: int = 6) -> None:
