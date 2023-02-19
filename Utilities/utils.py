@@ -1,9 +1,6 @@
 def RaiseTypeError(variable_name: str, necessaryType: str, currentType: str) -> Exception:
     raise TypeError(f'{variable_name} must be {necessaryType}, not {currentType}')
 
-def RaiseValueError(letter: str) -> Exception:
-    raise ValueError(f'Key letter "{letter}" does not exist in the alphabet')
-
 def getType(var) -> str: #Gets the type of variable and returns it as a string
     v = str(type(var))
     pos1 = v.find("'")
