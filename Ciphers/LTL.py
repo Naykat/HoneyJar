@@ -1,7 +1,7 @@
 #LTL encryption
 import sys
 sys.path.append('..')
-from Utilities.utils import RaiseTypeError, RaiseValueError, bSet, getType
+from Utilities.utils import RaiseTypeError, bSet, getType
 
 class LTL(): #Letter-to-letter
     def __init__(self, step: int = 6) -> None:
