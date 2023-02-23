@@ -11,16 +11,18 @@ def getType(var) -> str: #Gets the type of variable and returns it as a string
 def bSet(var: str or list) -> str or list: #Analogue to set(), but saves the order
     if type(var) is str:
         clean_string = ''
-        for letter in range(len(var)):
-            if not(var[letter] in clean_string):
-                clean_string+=var[letter]
+        for letter in var:
+            if not(letter in clean_string):
+                clean_string+=letter
         return clean_string
+
     elif type(var) is list:
         clean_array = []
         for item in var:
             if not(item in clean_array):
                 clean_array.append(item)
         return clean_array
+    
     else:
         currentType = getType(var)
         RaiseTypeError('var', 'str or list', currentType)
@@ -31,40 +33,34 @@ def findPos(string: str, alphabet: str) -> int:
         position = rounds*len(alphabet)+res
         return position
 
-def createStringToDecode(string: str) -> str: 
+def fingCharPosition(string: str) -> str: 
     digits = '0123456789'
     letter = 0
-    while True:
-        if string[letter] in digits:
-            letter+=1   
-        else:
-            break
-    string_to_decode = string[:letter+1]
-    return string_to_decode
+    while string[letter] in digits:
+        letter+=1
+    return string[:letter+1]
 
 def createArrayWithDividedEncodedLetters(string: str) -> list: 
-    array = []
-    for i in range(string.count(' ')):
+    array= []
+    for string_with_letter_positions in range(string.count(' ')):
         array.append(string[:string.find(' ')])
         string = string[string.find(' ')+1:]
     return array
 
-def getLetter(string: str) -> str:
-    return string[0]
-
-def getCharPos(dictionary: dict, pos: int, alphabet: str) -> str:
-    char = ''
-    for letter in range(len(alphabet)):
-        if pos in dictionary[alphabet[letter]]:
-            char = alphabet[letter]
+def returnChar(dictionary: dict, pos: int, alphabet: str) -> str:
+    for letter in alphabet:
+        if pos in dictionary[letter]:
+            char = letter
             break    
     return char        
 
-def getStringLength(dictionary: dict, alphabet: str) -> int:
+def calculateFullStringLength(dictionary: dict, alphabet: str) -> int:
     amount = 0
-    for letter in range(len(alphabet)):
-        array = dictionary[alphabet[letter]]
-        amount+=len(array)
+    for letter in alphabet:
+        amount+=len(dictionary[letter])
     return amount
+
+            
+
 
             
