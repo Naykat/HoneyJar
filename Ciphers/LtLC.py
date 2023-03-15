@@ -4,7 +4,7 @@ sys.path.append('..')
 from Utilities.utils import RaiseTypeError, bSet, getType
 from Data.constants import default_step
 
-class LTLC(): #Letter-to-letter
+class LtLC(): #Letter-to-letter
     def __init__(self, step: int = default_step) -> None:
         if not(type(step) == int):
             currentType = getType(step)
