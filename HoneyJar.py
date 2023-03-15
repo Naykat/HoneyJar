@@ -2,6 +2,7 @@ from Ciphers.AOL import AOL
 from Ciphers.LTL import LTL
 from Ciphers.SLC import SLC
 from Data.constants import *
+
 class HoneyJar():
 
     def __init__(self, alphabet: str = default_alphabet) -> None:
