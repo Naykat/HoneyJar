@@ -2,7 +2,7 @@ import sys
 sys.path.append("..")
 from Utilities.utils import swap_string, swap_letters
 
-class SLC():
+class SPoL():
     def __init__(self, limit: int = None):
         self.__limit = limit
 
