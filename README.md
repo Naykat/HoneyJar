@@ -7,8 +7,6 @@ HoneyJar has 2 functions:
 1) prepare(string) — encrypts string
 2) unbar(string) — decrypts string
 
-HoneyJar uses 3 encryptions:
-1) AOL — Amount of letter's repeats
-2) LTL — Letter to letter exchange
-3) SLC — Swap letters cipher
-![HoneyJar](https://user-images.githubusercontent.com/65075625/225286642-f33ec44d-e47d-49d3-9174-0392f17a0ed6.jpg)
+![QuickStart](https://user-images.githubusercontent.com/65075625/225291195-f564288a-a11d-4a57-a0c9-2fb084bc91d3.PNG)
+
+
