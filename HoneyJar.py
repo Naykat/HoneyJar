@@ -1,6 +1,6 @@
-from Ciphers.AOL import AOL
-from Ciphers.LTL import LTL
-from Ciphers.SLC import SLC
+from Ciphers.AOLR import AOLR
+from Ciphers.LTLC import LTLC
+from Ciphers.SPLC import SPLC
 from Data.constants import *
 
 class HoneyJar():
@@ -10,9 +10,9 @@ class HoneyJar():
         self._alphabet = alphabet 
 
         #Private variables. Cannot be called or changed outside the class
-        self.__Encryption1 = AOL(self._alphabet)
-        self.__Encryption2 = LTL(int(len(self._alphabet)**0.5))
-        self.__Encryption3 = SLC()
+        self.__Encryption1 = AOLR(self._alphabet)
+        self.__Encryption2 = LTLC(int(len(self._alphabet)**0.5))
+        self.__Encryption3 = SPLC()
 
     def prepare(self, string: str) -> str:
         string = self.__Encryption1.encode(string)
