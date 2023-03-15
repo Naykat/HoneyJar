@@ -1,5 +1,5 @@
 from Ciphers.AoLR import AoLR
-from Ciphers.LTLC import LTLC
+from Ciphers.LtLC import LtLC
 from Ciphers.SPoL import SPoL
 from Data.constants import *
 
@@ -11,7 +11,7 @@ class HoneyJar():
 
         #Private variables. Cannot be called or changed outside the class
         self.__Encryption1 = AoLR(self._alphabet)
-        self.__Encryption2 = LTLC(int(len(self._alphabet)**0.5))
+        self.__Encryption2 = LtLC(int(len(self._alphabet)**0.5))
         self.__Encryption3 = SPoL()
 
     def prepare(self, string: str) -> str:
