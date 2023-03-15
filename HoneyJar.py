@@ -1,10 +1,10 @@
 from Ciphers.AOL import AOL
 from Ciphers.LTL import LTL
 from Ciphers.SLC import SLC
-
+from Data.constants import *
 class HoneyJar():
 
-    def __init__(self, alphabet: str = '''ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()}{[]"№%:,.;_+-=/?\|±§<>'0123456789 ''') -> None:
+    def __init__(self, alphabet: str = default_alphabet) -> None:
         #Protected variable. Can be called, but not changed outside the class
         self._alphabet = alphabet 
 
