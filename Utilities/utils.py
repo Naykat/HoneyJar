@@ -60,6 +60,18 @@ def calculateFullStringLength(dictionary: dict, alphabet: str) -> int:
         amount+=len(dictionary[letter])
     return amount
 
+def swap_string(string: str, swap: int) -> list:
+  array = []
+  for split in range(0,len(string),swap):
+    array.append(string[:swap])
+    string = string[swap:]
+  return array
+
+def swap_letters(string: str):
+  if len(string)==1:
+    return string
+  else:
+    return string[-1]+string[1:-1]+string[0]
             
 
 
