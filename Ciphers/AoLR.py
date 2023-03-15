@@ -1,10 +1,10 @@
-#AOL encryption
+#AoRL encryption
 import sys
 sys.path.append('..')
 from Utilities.utils import RaiseTypeError, getType, bSet, findPos, fingCharPosition, createArrayWithDividedEncodedLetters, returnChar, calculateFullStringLength
 from Data.constants import default_alphabet
 
-class AOL():
+class AoLR():
     def __init__(self, alphabet: str = default_alphabet) -> None:
         if not(type(alphabet) == str):
             currentType = getType(alphabet)
