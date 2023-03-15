@@ -11,3 +11,4 @@ HoneyJar uses 3 encryptions:
 1) AOL — Amount of letter's repeats
 2) LTL — Letter to letter exchange
 3) SLC — Swap letters cipher
+![HoneyJar](https://user-images.githubusercontent.com/65075625/225286642-f33ec44d-e47d-49d3-9174-0392f17a0ed6.jpg)
