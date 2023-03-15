@@ -2,9 +2,10 @@
 import sys
 sys.path.append('..')
 from Utilities.utils import RaiseTypeError, getType, bSet, findPos, fingCharPosition, createArrayWithDividedEncodedLetters, returnChar, calculateFullStringLength
+from Data.constants import default_alphabet
 
 class AOL():
-    def __init__(self, alphabet: str = '''ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()}{[]"№%:,.;_+-=/?\|±§<>'0123456789  ⠀''') -> None:
+    def __init__(self, alphabet: str = default_alphabet) -> None:
         if not(type(alphabet) == str):
             currentType = getType(alphabet)
             RaiseTypeError('string', 'str', currentType)
