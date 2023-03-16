@@ -5,7 +5,7 @@
 1) **to_pixel** *— converts text to image*
 2) **to_string** *— converts image to text*
 
-## class HoneyJar and its functions
+## _class_ HoneyJar and its functions
 **HoneyJar** takes as an argument an alphabet(type: string) with letters that you will use in sentences you are going to encrypt
 1) **prepare** *— encrypts string*
 2) **unbar** *— decrypts string*
