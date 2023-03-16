@@ -24,8 +24,7 @@ def remove_repeats(var: str or list) -> str or list: #Analogue to set(), but sav
         return clean_array
     
     else:
-        currentType = getType(var)
-        RaiseTypeError('var', 'str or list', currentType)
+        raise TypeError("var can be str or list, not {get_type(var)}")
 
 def decode_position(string: str, alphabet: str) -> int: 
         res = alphabet.find(string[-1])
