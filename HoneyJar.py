@@ -43,7 +43,6 @@ def to_pixels(string: str):
     for index, letter in enumerate(string):
         x, y = get_current_pixel_position(index, width)
         image.putpixel((x, y),from_letter_to_rgb(letter))
-    image.save("test.png")
     return image
 
 def to_string(image: Image):
