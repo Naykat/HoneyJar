@@ -1,18 +1,14 @@
 #AoRL encryption
 import sys
 sys.path.append('..')
-from Utilities.utils import RaiseTypeError, getType, bSet, findPos, fingCharPosition, createArrayWithDividedEncodedLetters, returnChar, calculateFullStringLength
-from Data.constants import default_alphabet
+from Utilities.utils import remove_repeats, decode_position, find_char_position, split_by_unique_letters, return_char_by_position, sum_strings_lengths
+from Utilities.constants import default_alphabet
 
 class AoLR():
     def __init__(self, alphabet: str = default_alphabet) -> None:
-        if not(type(alphabet) == str):
-            currentType = getType(alphabet)
-            RaiseTypeError('string', 'str', currentType)
-        alphabet = alphabet.replace(' ','⠀').replace('0','௦').replace('1','௧').replace('2','௨').replace('3','௩').replace('4','௪').replace('5','௫').replace('6','௬').replace('7','௭').replace('8','௮').replace('9','௯')
         
-        #Constant
-        self.__alphabet = bSet(alphabet)
+        alphabet = alphabet.replace(' ','⠀').replace('0','௦').replace('1','௧').replace('2','௨').replace('3','௩').replace('4','௪').replace('5','௫').replace('6','௬').replace('7','௭').replace('8','௮').replace('9','௯')
+        self.__alphabet = remove_repeats(alphabet)
         
     def encode(self, string: str) -> str:
         string = string.replace(' ','⠀').replace('0','௦').replace('1','௧').replace('2','௨').replace('3','௩').replace('4','௪').replace('5','௫').replace('6','௬').replace('7','௭').replace('8','௮').replace('9','௯')
@@ -38,7 +34,7 @@ class AoLR():
         alphabet = ''
         string = string[::-1]+' '
         lap = {}
-        symbols = createArrayWithDividedEncodedLetters(string)
+        symbols = split_by_unique_letters(string)
         for letter in symbols:
             alphabet+=letter[0]
         for letter, current_string in enumerate(symbols):
@@ -46,14 +42,14 @@ class AoLR():
             current_letter = current_string[0]
             current_string = current_string[1:]
             while current_string!='':
-                encoded_position = fingCharPosition(current_string)
-                letter_pos = findPos(encoded_position, self.__alphabet)
+                encoded_position = find_char_position(current_string)
+                letter_pos = decode_position(encoded_position, self.__alphabet)
                 array_with_positions.append(letter_pos)
                 current_string = current_string.replace(encoded_position,'',1)
             lap[current_letter] = array_with_positions
         result = ''
-        for letters in range(calculateFullStringLength(lap, alphabet)):
-            result+=returnChar(lap, letters, alphabet)
+        for letters in range(sum_strings_lengths(lap, alphabet)):
+            result+=return_char_by_position(lap, letters, alphabet)
        
         result = result.replace(' ','⠀').replace('௦','0').replace('௧','1').replace('௨','2').replace('௩','3').replace('௪','4').replace('௫','5').replace('௬','6').replace('௭','7').replace('௮','8').replace('௯','9')
         
