@@ -11,8 +11,8 @@
 2) **unbar** *— decrypts string*
 
 ## QuickStart
+<img width="461" alt="HoneyJar QuickStart" src="https://user-images.githubusercontent.com/65075625/226047170-07c9ce58-0370-41c9-9aa0-349ab4195f86.png">
 
-<img width="434" alt="HoneyJar QuickStart" src="https://user-images.githubusercontent.com/65075625/225759366-b56a88cb-ffa5-4a58-9c30-7f5a613c598e.png">
 
 
 
