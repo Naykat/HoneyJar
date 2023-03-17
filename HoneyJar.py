@@ -1,40 +1,119 @@
-from Ciphers.AoLR import AoLR
-from Ciphers.LtLC import LtLC
-from Ciphers.SPoL import SPoL
-from Utilities.utils import get_type, calculate_image_size, from_letter_to_rgb, get_current_pixel_position, decode_pixel
-from Utilities.constants import default_alphabet
-from PIL import Image
+from utils.general import *
+from utils.SPoL import *
+from utils.AoLR import *
+from utils.txt2pixels import *
+from bin.default_values import *
 
-class HoneyJar():
 
+#Amount of Letter Repeats
+class AoLR():
     def __init__(self, alphabet: str = default_alphabet) -> None:
-        if type(alphabet)!=str:
-            raise TypeError(f"alphabet must be str, not {get_type(alphabet)}")
-        #Protected variable. Can be called, but not changed outside the class
-        self._alphabet = alphabet 
-
-        #Private variables. Cannot be called or changed outside the class
-        self.__AoLR = AoLR(self._alphabet)
-        self.__LtLC = LtLC(int(len(self._alphabet)**0.5))
-        self.__SPoL = SPoL()
-
-    def prepare(self, string: str) -> str:
-        if type(string)!=str:
-            raise TypeError(f"string must be str, not {get_type(string)}")
-        string = self.__AoLR.encode(string)
-        string = self.__LtLC.encode(string)
-        string = self.__SPoL.encode(string)
-        return string
+        alphabet = alphabet.replace(' ','⠀').replace('0','௦').replace('1','௧').replace('2','௨').replace('3','௩').replace('4','௪').replace('5','௫').replace('6','௬').replace('7','௭').replace('8','௮').replace('9','௯')
+        self.__alphabet = remove_repeats(alphabet)
         
-    def unbar(self, string: str) -> str:
-        if type(string)!=str:
-            raise TypeError(f"string must be str, not {get_type(string)}")
-        string = self.__SPoL.decode(string)
-        string = self.__LtLC.decode(string)
-        string = self.__AoLR.decode(string)
+    def encode(self, string: str) -> str:
+        string = string.replace(' ','⠀').replace('0','௦').replace('1','௧').replace('2','௨').replace('3','௩').replace('4','௪').replace('5','௫').replace('6','௬').replace('7','௭').replace('8','௮').replace('9','௯')
+        result = ''
+        alphabet = self.__alphabet
+        for letter in range(len(alphabet)):
+            if string.count(alphabet[letter])!=0:
+                result+=alphabet[letter]   
+                currentString = string
+                numbers = ''
+                for repeats in range(string.count(alphabet[letter])):
+                    letter_index = currentString.rfind(alphabet[letter])
+                    whole_number = letter_index//len(alphabet)
+                    res = letter_index%len(alphabet)
+                    result+=str(whole_number)+alphabet[res]
+                    currentString = currentString[:letter_index] 
+                result+=' '
+        result = result[:-1]
+        result = result[::-1]
+        return result
+    
+    def decode(self, string: str) -> str:
+        alphabet = ''
+        string = string[::-1]+' '
+        lap = {}
+        symbols = split_by_unique_letters(string)
+        for letter in symbols:
+            alphabet+=letter[0]
+        for letter, current_string in enumerate(symbols):
+            array_with_positions = []
+            current_letter = current_string[0]
+            current_string = current_string[1:]
+            while current_string!='':
+                encoded_position = find_char_position(current_string)
+                letter_pos = decode_position(encoded_position, self.__alphabet)
+                array_with_positions.append(letter_pos)
+                current_string = current_string.replace(encoded_position,'',1)
+            lap[current_letter] = array_with_positions
+        result = ''
+        for letters in range(sum_strings_lengths(lap, alphabet)):
+            result+=return_char_by_position(lap, letters, alphabet)
+        result = result.replace(' ','⠀').replace('௦','0').replace('௧','1').replace('௨','2').replace('௩','3').replace('௪','4').replace('௫','5').replace('௬','6').replace('௭','7').replace('௮','8').replace('௯','9')
+        return result
+
+
+#Swap Pairs of Letters
+class SPoL():
+    def __init__(self, limit: int = default_limit):
+        self.__limit = limit
+
+    def encode(self, string: str) -> str:
+        if self.__limit is None or self.__limit % len(string) == 0:
+            limit = len(string)//2
+        else:
+            limit = self.__limit%len(string)
+        
+        for swap in range(2,limit):
+            swapped_string = swap_string(string, swap)
+            string = ""
+            for element in swapped_string:
+              string+=swap_letters(element)
+        return string
+    
+    def decode(self, string: str) -> str:
+        if self.__limit is None or self.__limit % len(string) == 0:
+            limit = len(string)//2+1
+        else:
+            limit = self.__limit%len(string)+1
+            
+        for swap in range(2,limit):
+            swapped_string = swap_string(string, limit-swap)
+            string = ""
+            for element in swapped_string:
+                string+=swap_letters(element)
         return string
 
-def to_pixels(string: str):
+
+#Letter to Letter Change
+class LtLC(): 
+    def __init__(self, step: int = default_step) -> None:
+        self.__step = step
+   
+    def encode(self, string: str) -> str: 
+        step = self.__step
+        letters = remove_repeats(string)
+        result = ''
+        for symbol in string:
+            encoded_symbol = letters[(letters.index(symbol)+step)%len(letters)]
+            result+=encoded_symbol
+        return result[::-1]
+
+    def decode(self, string: str) -> str:
+        string = string[::-1]
+        step = self.__step
+        letters = remove_repeats(string)
+        result = ''
+        for symbol in string:
+            encoded_symbol = letters[(letters.index(symbol)-step)%len(letters)]
+            result+=encoded_symbol
+        return result
+
+
+#Text to pixels
+def to_pixels(string: str) -> Image:
     if type(string)!=str:
         raise TypeError(f"string must be str, not {get_type(string)}")
     width, height = calculate_image_size(string)
@@ -45,15 +124,31 @@ def to_pixels(string: str):
         image.putpixel((x, y),from_letter_to_rgb(letter))
     return image
 
-def to_string(image: Image):
-    if type(image)!=Image.Image:
-        raise TypeError(f"image must be Image, not {get_type(image)}")
+
+#Pixels to text
+def to_string(image: str or Image) -> str:
+    if type(image)==Image.Image:
+        pass
+    elif type(image)==str:
+        image = Image.open(image)
+    else:
+        raise TypeError(f"image must be str or Image, not {get_type(image)}")
     index = 0
     string = ""
-    width = image.size[0]
-    while image.getpixel(get_current_pixel_position(index, width))!=(0,0,0):
+    
+    width, height = image.size
+    while True:
         x, y = get_current_pixel_position(index, width)
-        current_pixel = image.getpixel((x,y))
-        string += decode_pixel(current_pixel)
-        index+=1
+        if (x+1)*(y+1)<width*height:
+            if image.getpixel((x,y))==(0,0,0):
+                break
+            current_pixel = image.getpixel((x,y))
+            string += decode_pixel(current_pixel)
+            index+=1
+        else:
+            last_pixel = image.getpixel((x,y))
+            string += decode_pixel(last_pixel)
+            break
     return string
+
+
