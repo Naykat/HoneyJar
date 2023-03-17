@@ -2,7 +2,7 @@
 **HoneyJar** is an encryption that will make your messages or files protected
 
 ### General Functions
-1) **to_pixel** *— converts text to image*
+1) **to_pixels** *— converts text to image*
 2) **to_string** *— converts image to text*
 
 ## _class_ HoneyJar and its functions
