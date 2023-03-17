@@ -1,25 +1,19 @@
 #LTL encryption
 import sys
 sys.path.append('..')
-from Utilities.utils import RaiseTypeError, bSet, getType
-from Data.constants import default_step
+from Utilities.utils import remove_repeats
+from Utilities.constants import default_step
 
 class LtLC(): #Letter-to-letter
     def __init__(self, step: int = default_step) -> None:
-        if not(type(step) == int):
-            currentType = getType(step)
-            RaiseTypeError('step', 'int', currentType)
-
-        #Constants
+        
         self.__step = step
 
          
     def encode(self, string: str) -> str: 
-        if not(type(string) == str):
-            currentType = getType(string)
-            RaiseTypeError('string', 'str', currentType)
+        
         step = self.__step
-        letters = bSet(string)
+        letters = remove_repeats(string)
         result = ''
         for symbol in string:
             encoded_symbol = letters[(letters.index(symbol)+step)%len(letters)]
@@ -28,12 +22,10 @@ class LtLC(): #Letter-to-letter
 
 
     def decode(self, string: str) -> str:
+        
         string = string[::-1]
-        if not(type(string) == str):
-            currentType = getType(string)
-            RaiseTypeError('string', 'str', currentType)
         step = self.__step
-        letters = bSet(string)
+        letters = remove_repeats(string)
         result = ''
         for symbol in string:
             encoded_symbol = letters[(letters.index(symbol)-step)%len(letters)]
