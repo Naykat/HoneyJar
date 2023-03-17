@@ -8,10 +8,14 @@ from bin.default_values import *
 #Amount of Letter Repeats
 class AoLR():
     def __init__(self, alphabet: str = default_alphabet) -> None:
+        if type(alphabet)!=str:
+            raise TypeError(f"alphabet must be str, not {get_type(alphabet)}")
         alphabet = alphabet.replace(' ','⠀').replace('0','௦').replace('1','௧').replace('2','௨').replace('3','௩').replace('4','௪').replace('5','௫').replace('6','௬').replace('7','௭').replace('8','௮').replace('9','௯')
         self.__alphabet = remove_repeats(alphabet)
         
     def encode(self, string: str) -> str:
+        if type(string)!=str:
+            raise TypeError(f"string must be str, not {get_type(string)}")
         string = string.replace(' ','⠀').replace('0','௦').replace('1','௧').replace('2','௨').replace('3','௩').replace('4','௪').replace('5','௫').replace('6','௬').replace('7','௭').replace('8','௮').replace('9','௯')
         result = ''
         alphabet = self.__alphabet
@@ -32,6 +36,8 @@ class AoLR():
         return result
     
     def decode(self, string: str) -> str:
+        if type(string)!=str:
+            raise TypeError(f"string must be str, not {get_type(string)}")
         alphabet = ''
         string = string[::-1]+' '
         lap = {}
@@ -58,9 +64,13 @@ class AoLR():
 #Swap Pairs of Letters
 class SPoL():
     def __init__(self, limit: int = default_limit):
+        if type(limit)!=int:
+            raise TypeError(f"limit must be int, not {get_type(limit)}")
         self.__limit = limit
 
     def encode(self, string: str) -> str:
+        if type(string)!=str:
+            raise TypeError(f"string must be str, not {get_type(string)}")
         if self.__limit is None or self.__limit % len(string) == 0:
             limit = len(string)//2
         else:
@@ -74,6 +84,8 @@ class SPoL():
         return string
     
     def decode(self, string: str) -> str:
+        if type(string)!=str:
+            raise TypeError(f"string must be str, not {get_type(string)}")
         if self.__limit is None or self.__limit % len(string) == 0:
             limit = len(string)//2+1
         else:
@@ -90,9 +102,13 @@ class SPoL():
 #Letter to Letter Change
 class LtLC(): 
     def __init__(self, step: int = default_step) -> None:
+        if type(step)!=int:
+            raise TypeError(f"step must be int, not {get_type(step)}")
         self.__step = step
    
-    def encode(self, string: str) -> str: 
+    def encode(self, string: str) -> str:
+        if type(string)!=str:
+            raise TypeError(f"string must be str, not {get_type(string)}")
         step = self.__step
         letters = remove_repeats(string)
         result = ''
@@ -102,6 +118,8 @@ class LtLC():
         return result[::-1]
 
     def decode(self, string: str) -> str:
+        if type(string)!=str:
+            raise TypeError(f"string must be str, not {get_type(string)}")
         string = string[::-1]
         step = self.__step
         letters = remove_repeats(string)
@@ -150,5 +168,3 @@ def to_string(image: str or Image) -> str:
             string += decode_pixel(last_pixel)
             break
     return string
-
-
