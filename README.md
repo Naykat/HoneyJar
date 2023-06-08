@@ -13,6 +13,17 @@
 **_class_ LtLC** takes **step** as an argument. Type: _int_
 1) **encode** *— encrypts text*
 2) **decode** *— decrypts text*
+### RSA
+**_class_ RSA** takes **p** and **q** as an argument. Type: _int_
+**p** _and_ **q** _must be prime numbers!_
+1) **encode** *— encrypts text*
+2) **decode** *— decrypts text*
+3) **get_private_key** *— returns private key*
+4) **get_public_key** *— returns public key*
+### VCI
+**_class_ VCI** takes **key** as an argument. Type: _str_
+1) **encode** *— encrypts text*
+2) **decode** *— decrypts text*
 
 
 ### Text to Pixels and back!
