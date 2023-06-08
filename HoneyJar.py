@@ -2,6 +2,7 @@ from utils.general import *
 from utils.SPoL import *
 from utils.AoLR import *
 from utils.txt2pixels import *
+from utils.RSA import *
 from bin.default_values import *
 
 
@@ -61,6 +62,44 @@ class AoLR():
         return result
 
 
+#Rivest, Shamir and Adleman
+class RSA:
+    def __init__(self, p: int, q: int) -> None:
+        if p == q:
+            raise ValueError("p and q values must be different!")
+        elif not is_prime(p):
+            raise ValueError(f"{p} is not prime number!")
+        elif not is_prime(q):
+            raise ValueError(f"{q} is not prime number!")
+        else:
+            n = p * q
+            phi = (p-1) * (q-1)
+            e = random.randrange(1, phi)
+            g = gcd(e, phi)
+            while g != 1:
+                e = random.randrange(1, phi)
+                g = gcd(e, phi)
+            d = mod_inverse(e, phi)
+            self.__public_key, self.__private_key = (e, n), (d, n)
+
+
+    def encode(self, pk: tuple, text: str) -> str:
+        key, n = pk
+        cipher = [(ord(char) ** key) % n for char in text]
+        return cipher
+
+    def decode(self, pk: tuple, text: str) -> str:
+        key, n = pk
+        plain = [chr((char ** key) % n) for char in text]
+        return ''.join(plain)
+
+    def get_private_key(self) -> tuple:
+        return self.__private_key
+
+    def get_public_key(self) -> tuple:
+        return self.__public_key
+
+
 #Swap Pairs of Letters
 class SPoL():
     def __init__(self, limit: int = default_limit):
@@ -99,6 +138,38 @@ class SPoL():
         return string
 
 
+#Vigenere Cipher Implementation
+class VCI:
+    def __init__(self, key: str):
+        self.__key = key
+
+    def encode(self, text: str):
+        ciphertext = ""
+        key_index = 0
+        for char in text:
+            if char.isalpha():
+                char = char.upper()
+                key_char = self.__key[key_index % len(self.__key)].upper()
+                shift = ord(key_char) - ord('A')
+                char = chr((ord(char) - ord('A') + shift) % 26 + ord('A'))
+                key_index += 1
+            ciphertext += char
+        return ciphertext
+
+    def decode(self, text: str):
+        plaintext = ""
+        key_index = 0
+        for char in text:
+            if char.isalpha():
+                char = char.upper()
+                key_char = self.__key[key_index % len(self.__key)].upper()
+                shift = ord(key_char) - ord('A')
+                char = chr((ord(char) - ord('A') - shift) % 26 + ord('A'))
+                key_index += 1
+            plaintext += char
+        return plaintext
+
+        
 #Letter to Letter Change
 class LtLC(): 
     def __init__(self, step: int = default_step) -> None:
