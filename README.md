@@ -49,19 +49,36 @@ def encryption1_decode(text: str) -> str:
     return encryption1.decode(text)
 
 #SPoL
-encryption2 = AoLR()
+encryption2 = SPoL()
 def encryption2_encode(text: str) -> str:
     return encryption2.encode(text)
 def encryption2_decode(text: str) -> str:
     return encryption2.decode(text)
+    
+#RSA
+encryption3 = RSA(3557, 2579)
+def encryption3_public_key() -> tuple:
+    return encryption3.get_public_key()
+def encryption3_private_key() -> tuple:
+    return encryption3.get_private_key()
+def encryption3_encode(text: str) -> str:
+    return encryption3.encode(encryption3_public_key(), text)
+def encryption3_decode(text: str) -> str:
+    return encryption3.decode(encryption3_private_key(), text)
 
 #LtLC
-encryption3 = LtLC()
-def encryption3_encode(text: str) -> str:
+encryption4 = LtLC()
+def encryption4_encode(text: str) -> str:
     return encryption3.encode(text)
-def encryption3_decode(text: str) -> str:
-    return encryption3.decode(text)
+def encryption4_decode(text: str) -> str:
+    return encryption4.decode(text)
 
+#VCI
+encryption5 = VCI("HONEYJAR")
+def encryption5_encode(text: str) -> str:
+    return encryption5.encode(text)
+def encryption5_decode(text: str) -> str:
+    return encryption5.decode(text)
 
 #Text to pixels
 image = to_pixels("Honey Jar Encryption")
@@ -74,7 +91,3 @@ text2 = to_string("images/example.png")
 print(text1)
 print(text2)
 ```
-
-
-
-
